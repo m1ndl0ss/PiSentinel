@@ -7,10 +7,10 @@ class Camera:
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, width)
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
-        def capture(self):
-            success, frame = self.cap.read()
-            if not success:
-                raise RuntimeError('Failed to capture image')
-            return frame
-        def release(self):
-            self.cap.release()
+    def capture(self):
+        success, frame = self.cap.read()
+        if not success:
+            raise RuntimeError('Failed to capture image')
+        return frame
+    def release(self):
+        self.cap.release()
