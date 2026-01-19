@@ -1,6 +1,6 @@
 from camera import Camera
 from motion import motion_detected
-from face_recognition import recognize_face
+from faceRecognition import recognize_face
 from database import load_known_faces
 
 def main():
