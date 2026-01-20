@@ -7,7 +7,7 @@ def load_known_faces(directory):
         if filename.endswith(('.jpg', '.png')):
             path = os.path.join(directory, filename)
             image = face_recognition.load_image_file(path)
-            encoding=face_recognition.face_encodings(image)
+            encoding = face_recognition.face_encodings(image)
 
             if encoding:
                 name = os.path.splitext(filename)[0]
