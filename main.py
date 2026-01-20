@@ -1,20 +1,21 @@
-import cv2
-import face_recognition
-import numpy as np
 
+from camera import Camera
+from motion import Motion
+from faceRecognition import recognise_face
+from database import load_known_faces
 
-def recognise_face(frame, known_faces, tolerance=0.7):
-    # Convert BGR to RGB and force a copy
-    rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB).copy()
+def main():
+    camera = Camera()
+    motion_detected = Motion()
+    known_faces = load_known_faces("data/known_faces")
+    try:
+        while True:
+            frame = camera.capture()
+            if motion_detected.detect(frame):
+                name = recognise_face(frame, known_faces)
+                print(name) #for debug
+    finally:
+        camera.release()
 
-    # Force it to be exactly what face_recognition wants
-    rgb_frame = np.ascontiguousarray(rgb_frame, dtype=np.uint8)
-
-    location = face_recognition.face_locations(rgb_frame)
-    encodings = face_recognition.face_encodings(rgb_frame, location)
-    for face_encoding in encodings:
-        for name, known_encoding in known_faces.items():
-            match = face_recognition.compare_faces([known_encoding], face_encoding, tolerance=tolerance)
-            if match[0]:
-                return name
-    return None
+if __name__ == "__main__":
+    main()
