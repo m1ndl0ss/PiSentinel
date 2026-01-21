@@ -1,7 +1,7 @@
 import cv2
 
 class Motion:
-    def __init__(self, pixelIntensityTreshold =30, blurSensitivity=21,pixelCountThreshold=25):
+    def __init__(self, pixelIntensityTreshold =30, blurSensitivity=20,pixelCountThreshold=25):
         self.previous_frame = None
         self.pixelIntensityThreshold = pixelIntensityTreshold
         self.blurSensitivity = blurSensitivity
